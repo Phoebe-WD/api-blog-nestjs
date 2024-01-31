@@ -19,7 +19,7 @@ Este es un proyecto final del bootcamp de JavaScript en el Backend de Código Fa
 
 ## Instalación y Configuración
 
-1. Clona el repositorio desde [GitHub](tu_enlace_al_repositorio).
+1. Clona el repositorio desde [GitHub](https://github.com/Phoebe-WD/api-blog-nestjs).
 2. Instala las dependencias con `npm install`.
 3. Configura las variables de entorno en un archivo `.env`.
 
@@ -128,7 +128,7 @@ Gracias a estas maravillosas personas: ([emoji key](https://allcontributors.org/
 
 <table>
   <tr>
-    <td align="center"><img src="https://avatars.githubusercontent.com/u/68600680?v=4" width="100px;" alt=""/><br /><sub><b>Phoebe Sttefi Wilckens Díaz</b></sub></a><br /><a href="" title="Documentation">📖</td>
+    <td align="center"><img src="https://avatars.githubusercontent.com/u/68600680?v=4" width="100px;" alt=""/><br /><sub><b>Phoebe Sttefi Wilckens Díaz</b></sub></a><br /><a href="https://github.com/Phoebe-WD/api-blog-nestjs" title="Documentation">📖</td>
   </tr>
 </table>
 
