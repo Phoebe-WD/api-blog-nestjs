@@ -1,15 +1,9 @@
-import {
-  // BadRequestException,
-  Injectable,
-  NotFoundException,
-  // UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Posts } from './schema/post.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreatePostDto, UpdatePostDto } from './dto/posts.dto';
 import { User } from 'src/users/schema/users.schema';
-// import { Request } from 'express';
 
 @Injectable()
 export class PostsService {
@@ -95,10 +89,11 @@ export class PostsService {
     const skipping = (pageNumber - 1) * limitNumber;
     const searchResults = await this.postModel
       .find({
-        $and: [
-          title ? { title: title } : {},
-          ,
-          author ? { author: author } : {},
+        $or: [
+          {
+            title: { $regex: new RegExp(title, 'i') },
+          },
+          { author: { $regex: new RegExp(author, 'i') } },
         ],
       })
       .skip(skipping)

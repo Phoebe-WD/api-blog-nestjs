@@ -45,6 +45,25 @@ export class PostsController {
       throw error;
     }
   }
+  @Get('search')
+  @Auth()
+  async searchPost(
+    @Query('query') query: string,
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '10',
+  ) {
+    return await this.postsService.searchPost(query, page, limit);
+  }
+  @Get('filter')
+  @Auth()
+  async filterPost(
+    @Query('title') title: string,
+    @Query('author') author: string,
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '10',
+  ) {
+    return await this.postsService.filterPost(title, author, page, limit);
+  }
   @Get('user/:userId')
   @Auth()
   async findOneByUser(@Param('userId') userId: string, @Res() res: Response) {
@@ -76,24 +95,5 @@ export class PostsController {
   @AuthAdmin(ROLES.ADMIN)
   async remove(@Param('id', ParseObjectIdPipe) id: string): Promise<Posts> {
     return await this.postsService.remove(id);
-  }
-  @Get('search')
-  @Auth()
-  async searchPost(
-    @Query('query') query: string,
-    @Query('page') page: string = '1',
-    @Query('limit') limit: string = '10',
-  ) {
-    return await this.postsService.searchPost(query, page, limit);
-  }
-  @Get('filter')
-  @Auth()
-  async filterPost(
-    @Query('title') title: string,
-    @Query('author') author: string,
-    @Query('page') page: string = '1',
-    @Query('limit') limit: string = '10',
-  ) {
-    return await this.postsService.filterPost(title, author, page, limit);
   }
 }

@@ -43,7 +43,6 @@ export class AuthService {
     return { access_token: await this.jwtService.sign(payload) };
   }
   async validateUser(email: string, password: string): Promise<any> {
-    console.log(email, password);
     const user = await this.usersService.findByEmail(email);
     if (!user) throw new UnauthorizedException('The email is incorrect');
     const isPasswordValid = await bcrypt.compare(password, user.password);

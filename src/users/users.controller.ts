@@ -1,19 +1,6 @@
-import {
-  Req,
-  Controller,
-  Get,
-  // Post,
-  Body,
-  Put,
-  Param,
-  Delete,
-  // HttpCode,
-  // HttpStatus,
-  // UseGuards,
-} from '@nestjs/common';
+import { Req, Controller, Get, Body, Put, Param, Delete } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
-// import { CreateUserDto } from './dto/users.dto';
 import { UpdateUserDto } from './dto/users.dto';
 import { Request } from 'express';
 import { ROLES } from 'src/helpers/enum/roles.enum';
