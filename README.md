@@ -27,7 +27,7 @@ Este es un proyecto final del bootcamp de JavaScript en el Backend de Código Fa
 
 ### Autenticación
 
-- **`POST /register`**
+- **`POST auth/register`**
   - Registro de nuevos usuarios.
   - Body:
     ```json
