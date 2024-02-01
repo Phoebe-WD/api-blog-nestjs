@@ -19,6 +19,7 @@ import { AuthAdmin, Auth } from 'src/decorators/auth.decorator';
 import { ROLES } from 'src/helpers/enum/roles.enum';
 import { ParseObjectIdPipe } from 'src/helpers/pipe/parse-object-id-pipe.pipe';
 import { Response } from 'express';
+import { Query as ExpressQuery } from 'express-serve-static-core';
 
 @Controller('posts')
 @ApiTags('post')
@@ -47,22 +48,13 @@ export class PostsController {
   }
   @Get('search')
   @Auth()
-  async searchPost(
-    @Query('query') query: string,
-    @Query('page') page: string = '1',
-    @Query('limit') limit: string = '10',
-  ) {
-    return await this.postsService.searchPost(query, page, limit);
+  async searchPost(@Query() query: ExpressQuery) {
+    return await this.postsService.searchPost(query);
   }
   @Get('filter')
   @Auth()
-  async filterPost(
-    @Query('title') title: string,
-    @Query('author') author: string,
-    @Query('page') page: string = '1',
-    @Query('limit') limit: string = '10',
-  ) {
-    return await this.postsService.filterPost(title, author, page, limit);
+  async filterPost(@Query() query: ExpressQuery) {
+    return await this.postsService.filterPost(query);
   }
   @Get('user/:userId')
   @Auth()

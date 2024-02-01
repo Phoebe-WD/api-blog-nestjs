@@ -89,16 +89,15 @@ Este es un proyecto final del bootcamp de JavaScript en el Backend de Código Fa
 ### Búsqueda y Filtrado
 
 - **`GET /posts/search`**
-  - Buscar posts por título & contenido del post.
+  - Buscar posts por título.
   - Query Params:
-    - `query`: Término de búsqueda.
+    - `keyword`: Término de búsqueda.
     - `page` (default: 1): Página de resultados.
     - `limit` (default: 10): Cantidad de resultados.
 - **`GET /posts/filter`**
-  - Filtrar posts por título o autor.
+  - Filtrar posts por autor.
   - Query Params:
     - `author`: Autor para filtrar.
-    - `title`: Título para filtrar.
 
 ### Administración
 

@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreatePostDto, UpdatePostDto } from './dto/posts.dto';
 import { User } from 'src/users/schema/users.schema';
-
+import { Query } from 'express-serve-static-core';
 @Injectable()
 export class PostsService {
   constructor(
@@ -59,43 +59,40 @@ export class PostsService {
   async remove(id: string): Promise<Posts> {
     return await this.postModel.findByIdAndDelete({ _id: id }).exec();
   }
-  async searchPost(query: string, page: string = '1', limit: string = '10') {
-    const pageNumber = parseInt(page);
-    const limitNumber = parseInt(limit);
+  async searchPost(query: Query) {
+    const keyword = query.keyword
+      ? {
+          title: {
+            $regex: query.keyword,
+            $options: 'i',
+          },
+        }
+      : {};
+    const pageNumber = Number(query.page) || 1;
+    const limitNumber = 10;
     const skipping = (pageNumber - 1) * limitNumber;
     const searchResults = await this.postModel
-      .find({
-        $or: [
-          {
-            title: { $regex: new RegExp(query, 'i') },
-          },
-          { contentBody: { $regex: new RegExp(query, 'i') } },
-        ],
-      })
+      .find({ ...keyword })
       .skip(skipping)
       .limit(limitNumber)
       .exec();
     if (!searchResults) throw new NotFoundException('No posts found');
     return searchResults;
   }
-  async filterPost(
-    title: string,
-    author: string,
-    page: string = '1',
-    limit: string = '10',
-  ) {
-    const pageNumber = parseInt(page);
-    const limitNumber = parseInt(limit);
+  async filterPost(query: Query) {
+    const keyword = query.author
+      ? {
+          author: {
+            $regex: query.author,
+            $options: 'i',
+          },
+        }
+      : {};
+    const pageNumber = Number(query.page) || 1;
+    const limitNumber = 10;
     const skipping = (pageNumber - 1) * limitNumber;
     const searchResults = await this.postModel
-      .find({
-        $or: [
-          {
-            title: { $regex: new RegExp(title, 'i') },
-          },
-          { author: { $regex: new RegExp(author, 'i') } },
-        ],
-      })
+      .find({ ...keyword })
       .skip(skipping)
       .limit(limitNumber)
       .exec();
